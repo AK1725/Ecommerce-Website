@@ -46,11 +46,13 @@ function addToCart(productID, name, price, image) {
 // Function to render the cart items on the cart page
 function renderCart() {
     const cartTable = document.querySelector('#cart tbody');
-    const subtotalElement = document.querySelector('#subtotal td:last-child');
+    const subtotalElement = document.getElementById('cart-subtotal');
+    const totalElement = document.getElementById('cart-total');
     cartTable.innerHTML = ''; // Clear current cart display
 
     let subtotal = 0;
 
+    // Iterate through cart and generate table rows
     cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
@@ -67,8 +69,13 @@ function renderCart() {
         `;
     });
 
+    // Update subtotal
     subtotalElement.textContent = `৳${subtotal}`;
+
+    // Update total (assuming shipping is free for now)
+    totalElement.textContent = `৳${subtotal}`;
 }
+
 
 // Function to update the quantity of a product in the cart
 function updateQuantity(index, newQuantity) {
