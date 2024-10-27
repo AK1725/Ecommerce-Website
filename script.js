@@ -115,4 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCart(productID, productName, productPrice, productImage);
         });
     });
+
+    const addToCart = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const productCard = button.closest('.single-pro-details');
+            const productID = productCard.dataset.id;
+            const productName = productCard.querySelector('h5').innerText;
+            const productPrice = parseFloat(productCard.querySelector('h4').innerText.replace('৳', ''));
+            const productImage = productCard.querySelector('img').src;
+
+            addToCart(productID, productName, productPrice, productImage);
+        });
+    });
 });
