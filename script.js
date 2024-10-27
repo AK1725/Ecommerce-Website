@@ -97,11 +97,12 @@ function removeFromCart(index) {
 
 // Initialization on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the cart on page load
     if (window.location.pathname.includes('cart.html')) {
         renderCart();
     }
 
-    // Add event listeners to 'Add to Cart' buttons
+    // Add event listeners for 'Add to Cart' buttons on the shop page
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
     addToCartButtons.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -116,17 +117,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const addToCart = document.querySelectorAll('.add-to-cart');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
+    // Add event listener for 'Add to Cart' button on the single-product page
+    const singleAddToCartButton = document.querySelector('.add-to-cart');
+    if (singleAddToCartButton) {
+        singleAddToCartButton.addEventListener('click', (event) => {
             event.preventDefault();
-            const productCard = button.closest('.single-pro-details');
+            const productCard = singleAddToCartButton.closest('.single-pro-details');
             const productID = productCard.dataset.id;
-            const productName = productCard.querySelector('h5').innerText;
-            const productPrice = parseFloat(productCard.querySelector('h4').innerText.replace('৳', ''));
-            const productImage = productCard.querySelector('img').src;
+            const productName = productCard.querySelector('h4').innerText;
+            const productPrice = parseFloat(productCard.querySelector('h2').innerText.replace('৳', ''));
+            const productImage = document.getElementById('MainImg').src;
 
             addToCart(productID, productName, productPrice, productImage);
         });
-    });
+    }
 });
+
